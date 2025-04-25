@@ -5,16 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class cocktailController extends AbstractController{
-
-    #[Route("/cocktail", name: "cocktail")]
-
-    public function cocktail(){
-        $cocktails = [
+class CocktailsController extends AbstractController
+{
+    public function cocktailsTable()
+    {
+        return [
             1 => [
                 'id'            => 1,
                 'nom'           => 'Mojito',
-                'image'         => 'https://www.1001cocktails.com/wp-content/uploads/1001cocktails/2023/03/81659_origin-scaled-2048x1366.jpg', // photo libre de droits
+                'image'         => 'https://www.1001cocktails.com/wp-content/uploads/1001cocktails/2023/03/81659_origin-scaled-2048x1366.jpg',
                 'ingredients'   => [
                     '50 ml de rhum blanc',
                     '½ citron vert (en quartiers)',
@@ -84,13 +83,41 @@ class cocktailController extends AbstractController{
                 ],
                 'date_creation' => '1919-06-01',
                 'description'   => 'Amertume élégante et notes d’agrumes pour ce grand classique italien.'
-            ],
+            ]
         ];
-
-        $cocktail = $cocktails[2];
-        return $this->render('cocktail.html.twig', ['cocktail' => $cocktail]);
-   
-
     }
 
+    //Router vers la page home
+    //affichage les 2 cocktails les plus récents
+
+    #[Route("/", name: "home")]
+    public function home(){
+
+        $cocktailsTable = $this->cocktailsTable();
+
+        usort($cocktailsTable, function ($a, $b) {
+            return $b['id'] - $a['id'];
+        });
+        
+        $lastestcocktails = array_slice($cocktailsTable, 0, 2);
+        return $this->render('home.html.twig', ['cocktails' => $lastestcocktails]);
+    }
+
+    //Router vers la page qui affiche tous les cocktails
+    #[Route("/listCocktails", name: "cocktails")]
+    public function  listCocktails(){
+        $cocktailsTable = $this->cocktailsTable();
+        return $this->render('listCocktails.html.twig', ['cocktails' => $cocktailsTable]);
+    }
+
+    //Route pour afficher un cocktail spécifique selon son id
+    #[Route("/cocktail/{id}", name: "cocktail")]
+    public function showCocktail($id){
+        $cocktailsTable = $this->cocktailsTable();
+        
+        return $this->render('showCocktail.html.twig', ['cocktail' => $cocktailsTable[$id]]);
+    }
 }
+
+
+
