@@ -87,7 +87,7 @@ class cocktailController extends AbstractController{
             ],
         ];
 
-        $cocktail = $cocktails[3];
+        $cocktail = $cocktails[2];
         return $this->render('cocktail.html.twig', ['cocktail' => $cocktail]);
    
 
