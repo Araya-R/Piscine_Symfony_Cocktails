@@ -1,0 +1,22 @@
+{% include "partials/_header.html.twig" %}
+
+<main class="container">
+	<h3>Tous les Cocktails:</h3>
+
+	{% for cocktail in cocktails %}
+		<div class="cocktail-card">
+			<h3>{{ cocktail.nom}}</h3>
+			<img src="{{ cocktail.image}}" width="50%">
+			<p>{{ cocktail.description }}</p>
+
+			<p>Les ingrédients :</p>
+			<ul>
+				{% for ingredient in cocktail.ingredients %}
+					<li>{{ ingredient }}</li>
+				{% endfor %}
+			</ul>
+			<p>{{ cocktail.date_creation | date ('y-m-d') }}</p>
+		</div>
+	{% endfor %}
+
+</main></body></html>
