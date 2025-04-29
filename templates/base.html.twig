@@ -4,8 +4,12 @@
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title> {% block metatitle %}{% endblock metatitle %} </title>
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1.0">
+		{# je défie le block metatitle afin de personnaliser le titre de chaque page #}
+		<title>
+			{% block metatitle %}{% endblock metatitle %}
+		</title>
 		<link rel="stylesheet" href="{{ asset('assets/style.css') }}">
 
 	</head>
@@ -16,16 +20,16 @@
 				<ul>
 					<li><a href="{{ path("home") }}">Home</a></li>
 					<li><a href="{{ path("cocktails") }}">Tous les cocktails</a></li>
-	
+					<li><a href="{{ path("category") }}">Catégorie</a></li>
 				</ul>
 			</nav>
 		</header>
-        
-{% include "partials/_aside-ad.html.twig" %}
 
+		{% include "partials/_aside-ad.html.twig" %}
 
-{# je définie le bloc main -> changement de contenu en fonction des pages #}
-{# mais  le header et l'aside et le footer restent tjs les mêmes #}
-{% block main %}{% endblock main %}
+		{# je définie le bloc main -> changement de contenu en fonction des pages #}
+		{# mais  le header et l'aside et le footer restent tjs les mêmes #}{% block main %}
+		{% endblock main %}
 
-{% include "partials/_footer.html.twig" %}
+	{% include "partials/_footer.html.twig" %}
+</body></html>

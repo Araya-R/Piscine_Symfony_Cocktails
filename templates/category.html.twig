@@ -10,9 +10,8 @@
 		<div>
             {% for category in category %}
 			<h4>
-			{{ category.nom}}
+			<a href="{{ path('show-category', { 'id': category.id }) }}">{{ category.nom}}</a>
 			</h4>
-			<p>{{ category.description }}</p>
             {% endfor %}
 		</div>
 	</main>

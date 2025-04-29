@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block metatitle %}
+	{{ category.nom}}
+{% endblock metatitle %}
+
+{% block main %}
+	<main>
+		<div class="cocktail-card">
+			<h4>
+				<a href="{{ path('show-category', { 'id': category.id }) }}">{{ category.nom}}</a>
+			</h4>
+			<p>{{ category.description }}</p>
+
+		</div>
+	</main>
+{% endblock main %}

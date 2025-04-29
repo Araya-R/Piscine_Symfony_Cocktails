@@ -40,6 +40,15 @@ class categoryController extends AbstractController
         $listcategory=$this->categoryTable();
         return $this->render('category.html.twig',['category' =>$listcategory]);
     }
+
+    //Route pour afficher la categorie cliquée
+    #[Route("/category/{id}", name: "show-category")]
+    public function showCategory($id){
+        $listcategory=$this->categoryTable();
+
+        return $this->render('showCategory.html.twig', ['category' => $listcategory[$id]]);
+
+    }
 }
     
 
