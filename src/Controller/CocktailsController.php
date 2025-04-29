@@ -3,6 +3,10 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+// importe l'exception utilisée pour générer une erreur 404
+//NotFoundHttpException = une classe dans Symfony pour générer une erreur HTTP 404
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CocktailsController extends AbstractController
@@ -101,9 +105,11 @@ class CocktailsController extends AbstractController
         
         $lastestcocktails = array_slice($cocktailsTable, 0, 2);
         return $this->render('home.html.twig', ['cocktails' => $lastestcocktails]);
+
+        //ou array_slice($cocktailsTable, -2, 2,true)
     }
 
-    //Router vers la page qui affiche tous les cocktails
+    //Route vers la page qui affiche tous les cocktails
     #[Route("/listCocktails", name: "cocktails")]
     public function  listCocktails(){
         $cocktailsTable = $this->cocktailsTable();
@@ -114,10 +120,44 @@ class CocktailsController extends AbstractController
     #[Route("/cocktail/{id}", name: "cocktail")]
     public function showCocktail($id){
         $cocktailsTable = $this->cocktailsTable();
+
+        //Vérifie si le cocktail demandé existe bien dans le tableau, sinon affichage du message d'erreur
+        if (!isset ($cocktailsTable[$id])){
+            throw new NotFoundHttpException("Cocktail avec l'ID $id introuvable.");
+        }
         
         return $this->render('showCocktail.html.twig', ['cocktail' => $cocktailsTable[$id]]);
+
     }
 }
+// OU //
+
+// dans la fonction displaySingleCocktails, crééé un parametre $request.
+// si j'ajoute devant ce parametre le nom d'une classe existante
+// ça demande à symfony de créer une instance de cette (new NomDeLaClasse)
+// automatiquement dans la variable $request
+// c'est ce qu'on l'autowire (cablage automatique)
+
+    // #[Route(path:"coctail, name : "cocktail")];
+	// public function showCocktail(Request $request) {
+    // $cocktailsTable = $this->cocktailsTable();
+
+        // j'utilise l'instance de la classe Request créé par symfony
+		// j'utilise la propriété query pour accéder aux données GET
+		// j'utilise la fonction ->get pour récupérer un parametre en particulier
+
+
+// Utilisation de la méthode query->get pour récupérer 
+// le paramètre 'id' dans l'URL (par exemple : ?id=1)
+	// 	$cocktailId = $request->query->get("id");
+
+// Récupérer le cocktail correspondant
+	// 	$cocktail = $cocktails[$cocktailId];
+
+//Retourner le rendu de la vue avec le cocktail
+	// 	return $this->render('showCocktail.html.twig', ['cocktail' => $cocktail]);
+
+
 
 
 

@@ -1,0 +1,10 @@
+{# je définie la structure de mes pages en utilisant base.html.twig #}
+{% include "partials/_header.html.twig" %}
+{% include "partials/_aside-ad.html.twig" %}
+
+
+{# je définie le bloc main -> changement de contenu en fonction des pages #}
+{# mais  le header et l'aside et le footer restent tjs les mêmes #}
+{% block main %}{% endblock main %}
+
+{% include "partials/_footer.html.twig" %}

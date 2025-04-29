@@ -1,23 +1,9 @@
-{% include "partials/_header.html.twig" %}
+{% extends "base.html.twig" %}
+
+{% block main %}
 
 <main class="container">
 	<h3>Tous les Cocktails:</h3>
-
-	{% for cocktail in cocktails %}
-		<div class="cocktail-card">
-			
-			<img src="{{ cocktail.image}}" width="50%">
-			<h3><a href="{{ path('cocktail', { 'id': cocktail.id }) }}">{{ cocktail.nom}}</a></h3>
-			<p>{{ cocktail.description }}</p>
-
-			<p>Les ingrédients :</p>
-			<ul>
-				{% for ingredient in cocktail.ingredients %}
-					<li>{{ ingredient }}</li>
-				{% endfor %}
-			</ul>
-			<p>{{ cocktail.date_creation | date ('y-m-d') }}</p>
-		</div>
-	{% endfor %}
-
-</main></body></html>
+	{% include "partials/_loops-cocktails.html.twig" %}
+</main>
+{% endblock main %}

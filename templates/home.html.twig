@@ -1,25 +1,11 @@
-<html>
-	{% include "partials/_header.html.twig" %}
+{% extends "base.html.twig" %}
+{# je fais hériter cette page de base.html.twig -> elle va se baser sur un modele déjà défini #}
 
-	<main>
+
+{% block main %}
+	<main class="container">
 		<h3>Les cocktails les plus récents:</h3>
-
-		{% for cocktail in cocktails %}
-			<div>
-				<img src="{{ cocktail.image }}" width="50%">
-				<h3><a href="{{ path('cocktail', { 'id': cocktail.id }) }}">{{ cocktail.nom}}</a></h3>
-				<p>{{ cocktail.description }}</p>
-
-				<p>Les ingrédients :</p>
-				<ul>
-					{% for ingredient in cocktail.ingredients %}
-						<li>{{ ingredient }}</li>
-					{% endfor %}
-				</ul>
-
-				<p>{{ cocktail.date_creation | date ('y-m-d') }}</p>
-				
-			</div>
-		{% endfor %}
+		{% include "partials/_loops-cocktails.html.twig" %}
 	</main>
-</html>
+{% endblock main %}
+
