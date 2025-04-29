@@ -1,5 +1,26 @@
 {# je définie la structure de mes pages en utilisant base.html.twig #}
-{% include "partials/_header.html.twig" %}
+
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title> {% block metatitle %}{% endblock metatitle %} </title>
+		<link rel="stylesheet" href="{{ asset('assets/style.css') }}">
+
+	</head>
+	<body>
+		<header>
+			<h1>Les meilleurs cocktails du monde!</h1>
+			<nav>
+				<ul>
+					<li><a href="{{ path("home") }}">Home</a></li>
+					<li><a href="{{ path("cocktails") }}">Tous les cocktails</a></li>
+	
+				</ul>
+			</nav>
+		</header>
+        
 {% include "partials/_aside-ad.html.twig" %}
 
 

@@ -1,7 +1,9 @@
 {% extends "base.html.twig" %}
 {# je fais hériter cette page de base.html.twig -> elle va se baser sur un modele déjà défini #}
 
-
+ {% block metatitle %}
+	Page d'accueil
+ {% endblock metatitle %}
 {% block main %}
 
 	<main class="home-page">

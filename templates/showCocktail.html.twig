@@ -1,5 +1,9 @@
 {% extends "base.html.twig" %}
 
+ {% block metatitle %}
+ {{ cocktail.nom}}
+ {% endblock metatitle %}
+
 {% block main %}
 	<main>
 		<div class="cocktail-card">
