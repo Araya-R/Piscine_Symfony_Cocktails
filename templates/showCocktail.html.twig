@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block main %}
-	<main class="container">
+	<main>
 		<div class="cocktail-card">
 			<img src="{{ cocktail.image }}">
-			<h3>
+			<h4>
 				<a href="{{ path('cocktail', { 'id': cocktail.id }) }}">{{ cocktail.nom}}</a>
-			</h3>
+			</h4>
 			<p>{{ cocktail.date_creation }}</p>
 			<p>{{ cocktail.description }}</p>
 
