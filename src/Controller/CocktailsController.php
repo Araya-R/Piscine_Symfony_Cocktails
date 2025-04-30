@@ -15,17 +15,11 @@ class CocktailsController extends AbstractController
     //Router vers la page home
     //affichage les 2 cocktails les plus récents
     #[Route("/", name: "home")]
-    public function home(){
-
-        // je crée une instance de la classe CocktailsRepository 
-        //et j'appelle la fct findAll pour récupérer la liste des cocktails
-        $cocktailsRepository = new CocktailsRepository;
+    public function home(CocktailsRepository $cocktailsRepository ){
         $cocktails = $cocktailsRepository->findAll();
-
         usort($cocktails, function ($a, $b) {
             return $b['id'] - $a['id'];
         });
-        
         $lastestcocktails = array_slice($cocktails, 0, 2);
         return $this->render('home.html.twig', ['cocktails' => $lastestcocktails]);
 
@@ -34,25 +28,27 @@ class CocktailsController extends AbstractController
 
     //Route vers la page qui affiche tous les cocktails
     #[Route("/listCocktails", name: "cocktails")]
-    public function  listCocktails(){
-
-        $cocktailsRepository = new CocktailsRepository;
+    public function  listCocktails(CocktailsRepository $cocktailsRepository){
         $cocktails = $cocktailsRepository->findAll();
-       
         return $this->render('listCocktails.html.twig', ['cocktails' => $cocktails]);
     }
 
     //Route pour afficher un cocktail spécifique selon son id
     #[Route("/cocktail/{id}", name: "cocktail")]
-    public function showCocktail($id){
-        $cocktailsRopository = new CocktailsRepository;
+
+    //injecter automatiquement l'instance de classe CocktailsRepository dans la méthode showCocktail
+    //grâce à l'autowiring
+    public function showCocktail($id, CocktailsRepository $cocktailsRopository ){
         $cocktail = $cocktailsRopository->FindOneById($id);
-        
         return $this->render('showCocktail.html.twig', ['cocktail' => $cocktail]);
 
     }
 }
-// OU //
+
+
+
+
+// OU // 
 
 // dans la fonction displaySingleCocktails, crééé un parametre $request.
 // si j'ajoute devant ce parametre le nom d'une classe existante

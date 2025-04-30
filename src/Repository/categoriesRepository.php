@@ -31,4 +31,12 @@ class CategoriesRepository
 
         return $categories;
     }
+
+    public function FindOnebyID($id){
+
+        $categories = $this->findAll();
+        $category = $categories[$id];
+        
+        return $category;
+    }
 }
