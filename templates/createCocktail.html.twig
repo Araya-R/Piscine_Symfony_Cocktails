@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block metatitle %}
+	Create Cocktail
+{% endblock metatitle %}
+{% block main %}
+
+	<main>
+		<h3>Creation Un Cocktail:</h3>
+
+		<form method="post">
+			<div>
+				<label for="name">Nom
+					<input type="text">
+				</label>
+			</div>
+
+			<div>
+				<label for="description">Description
+					<input type="textarea">
+				</label>
+			</div>
+
+			<div>
+				<label for="ingrédients">Ingrédients
+					<input type="textarea">
+				</label>
+			</div>
+
+			<div>
+				<label for="image">Image
+					<input type="text">
+				</label>
+			</div>
+
+			<div>
+				<input type="submit">
+			</div>
+
+		</form>
+
+	</main>
+{% endblock main %}

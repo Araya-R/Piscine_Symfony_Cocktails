@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Repository\CocktailsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Cocktail;
+use Symfony\Component\HttpFoundation\Request;
+//=require sur la page où on a créé la class Cocktail pour pouvoir l'utiliser
 
 // importe l'exception utilisée pour générer une erreur 404
 //NotFoundHttpException = une classe dans Symfony pour générer une erreur HTTP 404
@@ -15,7 +18,8 @@ class CocktailsController extends AbstractController
     //Router vers la page home
     //affichage les 2 cocktails les plus récents
     #[Route("/", name: "home")]
-    public function home(CocktailsRepository $cocktailsRepository ){
+    public function home(CocktailsRepository $cocktailsRepository)
+    {
         $cocktails = $cocktailsRepository->findAll();
         usort($cocktails, function ($a, $b) {
             return $b['id'] - $a['id'];
@@ -28,7 +32,8 @@ class CocktailsController extends AbstractController
 
     //Route vers la page qui affiche tous les cocktails
     #[Route("/listCocktails", name: "cocktails")]
-    public function  listCocktails(CocktailsRepository $cocktailsRepository){
+    public function  listCocktails(CocktailsRepository $cocktailsRepository)
+    {
         $cocktails = $cocktailsRepository->findAll();
         return $this->render('listCocktails.html.twig', ['cocktails' => $cocktails]);
     }
@@ -38,12 +43,31 @@ class CocktailsController extends AbstractController
 
     //injecter automatiquement l'instance de classe CocktailsRepository dans la méthode showCocktail
     //grâce à l'autowiring
-    public function showCocktail($id, CocktailsRepository $cocktailsRopository ){
+    public function showCocktail($id, CocktailsRepository $cocktailsRopository)
+    {
         $cocktail = $cocktailsRopository->FindOneById($id);
         return $this->render('showCocktail.html.twig', ['cocktail' => $cocktail]);
+    }
 
+    #[Route("/create-cocktail", name: "create-cocktail")]
+    public function createCocktail(Request $request)
+    {
+        //je vérifie si le formulaire a été soumis (via Post)
+        if ($request->isMethod('POST')) {
+            $name = $request->request->get('name');
+            $description = $request->request->get('description');
+            $ingredients = $request->request->get('ingredients');
+            $image = $request->request->get('image');
+
+            //Je crée un objet Cocktail
+            $cocktail = new Cocktail($name, $description, $ingredients, $image);
+
+        }
+        return $this->render('createCocktail.html.twig', ['cocktail' =>$cocktail]);
+    
     }
 }
+
 
 
 
@@ -74,8 +98,3 @@ class CocktailsController extends AbstractController
 
 //Retourner le rendu de la vue avec le cocktail
 	// 	return $this->render('showCocktail.html.twig', ['cocktail' => $cocktail]);
-
-
-
-
-
