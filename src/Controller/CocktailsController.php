@@ -61,7 +61,9 @@ class CocktailsController extends AbstractController
 
             //Je crée un objet Cocktail
             $cocktail = new Cocktail($name, $description, $ingredients, $image);
-            dd($cocktail);
+            
+            //permet d'afficher un message flash de type "success" dans la vue
+            $this->addFlash("success", "Cocktail bien enregistré!");
         }
         return $this->render('createCocktail.html.twig');
     

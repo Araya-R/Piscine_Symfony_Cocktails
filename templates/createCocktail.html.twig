@@ -8,6 +8,14 @@
 	<main>
 		<h3>Creation Un Cocktail:</h3>
 
+        {#  affichage de message flash de type 'success'
+        il parcourt tous les messages stockés avec la clé 'success' #}
+		{% for message in app.flashes('success') %}
+			<div>
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		<form method="post">
 			<div>
 				<label for="name">Nom
