@@ -61,9 +61,9 @@ class CocktailsController extends AbstractController
 
             //Je crée un objet Cocktail
             $cocktail = new Cocktail($name, $description, $ingredients, $image);
-
+            dd($cocktail);
         }
-        return $this->render('createCocktail.html.twig', ['cocktail' =>$cocktail]);
+        return $this->render('createCocktail.html.twig');
     
     }
 }
