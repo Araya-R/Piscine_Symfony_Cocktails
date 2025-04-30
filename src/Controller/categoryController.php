@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Repository\categoriesRepository;
+use App\Repository\CategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class categoryController extends AbstractController
+class CategoryController extends AbstractController
 {
    
     //Route vers la page qui affiche toutes les catégories

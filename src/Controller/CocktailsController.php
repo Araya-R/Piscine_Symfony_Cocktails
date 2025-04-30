@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\cocktailsRepository;
+use App\Repository\CocktailsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 // importe l'exception utilisée pour générer une erreur 404
@@ -14,13 +14,12 @@ class CocktailsController extends AbstractController
 {
     //Router vers la page home
     //affichage les 2 cocktails les plus récents
-
     #[Route("/", name: "home")]
     public function home(){
 
-        // je crée une instance de la classe cocktailsRepository 
+        // je crée une instance de la classe CocktailsRepository 
         //et j'appelle la fct findAll pour récupérer la liste des cocktails
-        $cocktailsRepository = new cocktailsRepository;
+        $cocktailsRepository = new CocktailsRepository;
         $cocktails = $cocktailsRepository->findAll();
 
         usort($cocktails, function ($a, $b) {
@@ -37,7 +36,7 @@ class CocktailsController extends AbstractController
     #[Route("/listCocktails", name: "cocktails")]
     public function  listCocktails(){
 
-        $cocktailsRepository = new cocktailsRepository;
+        $cocktailsRepository = new CocktailsRepository;
         $cocktails = $cocktailsRepository->findAll();
        
         return $this->render('listCocktails.html.twig', ['cocktails' => $cocktails]);
@@ -46,15 +45,10 @@ class CocktailsController extends AbstractController
     //Route pour afficher un cocktail spécifique selon son id
     #[Route("/cocktail/{id}", name: "cocktail")]
     public function showCocktail($id){
-        $cocktailsRepository = new cocktailsRepository;
-        $cocktails = $cocktailsRepository->findAll();
-
-        //Vérifie si le cocktail demandé existe bien dans le tableau, sinon affichage du message d'erreur
-        if (!isset ($cocktails[$id])){
-            throw new NotFoundHttpException("Cocktail avec l'ID $id introuvable.");
-        }
+        $cocktailsRopository = new CocktailsRepository;
+        $cocktail = $cocktailsRopository->FindOneById($id);
         
-        return $this->render('showCocktail.html.twig', ['cocktail' => $cocktails[$id]]);
+        return $this->render('showCocktail.html.twig', ['cocktail' => $cocktail]);
 
     }
 }

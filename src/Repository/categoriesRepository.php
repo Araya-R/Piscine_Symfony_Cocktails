@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-class categoriesRepository
+class CategoriesRepository
 {
     public function findAll()
     {

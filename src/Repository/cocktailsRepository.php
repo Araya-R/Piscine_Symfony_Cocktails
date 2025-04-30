@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Repository;
-
-//
-class cocktailsRepository
+class CocktailsRepository
 {
     // la méthode findAll me retourne la liste des cocktails
     public function findAll()
@@ -86,5 +84,13 @@ class cocktailsRepository
         ];
 
         return $cocktails;
+    }
+
+    public function FindOneById($id){
+        $cocktails = $this->FindAll();
+        $cocktail = $cocktails[$id];
+
+        return $cocktail;
+
     }
 }
