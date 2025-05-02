@@ -13,10 +13,8 @@ class Cocktail{
 
     // on définit la clé primaire à ID
     #[ORM\Id]
-
     //en auto-incrément dans MySQL
     #[ORM\GeneratedValue]
-
     //cette colonne est de type INT
     #[ORM\Column (type:'integer')]
     public ?int $id = null;
