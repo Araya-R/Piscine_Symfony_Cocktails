@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-//j'importe le namespace de Doctrin ORM
+//j'importe le namespace de Doctrine ORM
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
